@@ -72,10 +72,10 @@ export default {
 
   server: {
     port: process.env.PORT || 3000,
-    host: process.env.HOST || 'localhost'
+    host: process.env.HOST || '0.0.0.0'
   },
 
   env: {
-    BASE_URL: process.env.BASE_URL || '',
+    BASE_URL: process.env.BASE_URL || 'https://api.livestream.festusyuma.com',
   }
 }
