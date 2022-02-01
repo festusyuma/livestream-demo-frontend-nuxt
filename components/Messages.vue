@@ -1,10 +1,13 @@
 <template>
-  <div class="chat-messages">
+  <div class="chat-messages py-5 flex flex-col">
     <div
       v-for="(message, id) in messages"
       :key="`message-${id}`"
-      class="message">
-      {{ message.text }}
+      class="message w-80"
+      :class="[message.mine ? 'mine' : '']"
+    >
+      <small class="text-xs">{{ message.from }}</small>
+      <p>{{ message.message }}</p>
     </div>
   </div>
 </template>
@@ -24,10 +27,25 @@ export default {
     return {
       messages: []
     }
+  },
+
+  watch: {
+    session(session) {
+      session.on('signal:msg', (e) => {
+        const senderData = JSON.parse(e.from.data)
+        const message = JSON.parse(e.data)
+        message.mine = e.from.connectionId === session.connection.id
+        message.from = senderData.name
+        this.messages.push(message)
+      })
+    }
   }
 }
 </script>
 
 <style scoped>
-
+.mine {
+  margin-left: auto;
+  text-align: right;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="stream-viewer">
-    <div id="publisher" class="w-full aspect-video rounded-b-sm">
+    <div id="publisher" class="w-full aspect-video rounded-md overflow-hidden">
 
     </div>
   </div>

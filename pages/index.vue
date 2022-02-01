@@ -5,7 +5,7 @@
         <StreamViewer />
       </div>
       <div class="col-span-3 py-3 px-1">
-        <ChatBox session="session" />
+        <ChatBox :session="session" />
       </div>
     </div>
   </div>
@@ -27,13 +27,6 @@ export default {
 
   async fetch() {
     await this.startStream()
-  },
-
-  watch: {
-    session(val) {
-      if (!val) return
-      this.initPublisher()
-    }
   },
 
   methods: {
@@ -58,23 +51,21 @@ export default {
           insertMode: 'append',
           width: '100%',
           height: '100%',
-          publishVideo: false,
+          showControls: false
         }, this.handleError);
 
         // Connect to the session
         session.connect(token, function(error) {
           if (error) this.handleError(error);
-          else session.publish(publisher, this.handleError)
+          else session.publish(publisher, (e) => {
+            if (e) this.$toast.error(e.message)
+          })
         });
 
-        window.console.log(session)
+        this.session = session
       } catch (e) {
         window.console.log(e)
       }
-    },
-
-    initPublisher() {
-
     },
 
     handleError(e) {
