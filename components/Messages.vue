@@ -6,8 +6,8 @@
       class="message w-80"
       :class="[message.mine ? 'mine' : '']"
     >
-      <small class="text-xs">{{ message.from }}</small>
-      <p>{{ message.message }}</p>
+      <small class="text-xs text-gray-500">{{ message.from }}</small>
+      <p class="text-xs">{{ message.message }}</p>
     </div>
   </div>
 </template>
