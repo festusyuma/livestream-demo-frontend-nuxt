@@ -23,7 +23,7 @@
     </div>
     <div v-else class="grid grid-cols-10">
       <div class="col-span-7">
-        <StreamViewer />
+        <StreamViewer :publisher="publisher" />
       </div>
       <div class="col-span-3">
         <ChatBox :session="session" />
@@ -85,14 +85,17 @@ export default {
       try {
         const session = OT.initSession(apiKey, sessionId)
 
+        const subscriber = OT.Subscriber('publisher', {
+          insertMode: 'append',
+          width: '100%',
+          height: '100%',
+          showControls: false,
+          subscribeToAudio: true
+        })
+
+
         session.on('streamCreated', function(event) {
-          session.subscribe(event.stream, 'publisher', {
-            insertMode: 'append',
-            width: '100%',
-            height: '100%',
-            showControls: false,
-            subscribeToAudio: true
-          }, this.handleError);
+          session.subscribe(event.stream, subscriber, this.handleError);
         });
 
         // Connect to the session

@@ -36,9 +36,11 @@ export default {
 
   watch: {
     session(session) {
+      window.console.log(session)
       session.on('signal:msg', (e) => {
         const senderData = JSON.parse(e.from.data)
         const message = JSON.parse(e.data)
+        window.console.log(senderData, message)
         message.mine = e.from.connectionId === session.connection.id
         message.from = senderData.name
         this.messages.push(message)
