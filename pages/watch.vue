@@ -1,5 +1,15 @@
 <template>
   <div class="watch-stream px-2">
+    <div class="details-form">
+      <form>
+        <div class="form-group">
+          <input type="tel" placeholder="Phone Number" title="phone number" />
+        </div>
+        <div class="form-group">
+          <input type="tel" placeholder="Phone Number" title="phone number" />
+        </div>
+      </form>
+    </div>
     <div class="grid grid-cols-10">
       <div class="col-span-7 py-3 px-1">
         <StreamViewer />
