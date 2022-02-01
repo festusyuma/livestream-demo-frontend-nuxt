@@ -40,6 +40,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     '@nuxt/postcss8',
+    '@nuxtjs/fontawesome',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -68,6 +69,23 @@ export default {
   toast: {
     position: 'top-center',
     duration: 10000,
+  },
+
+  fontawesome: {
+    icons: {
+      solid: [
+        'faCircleNotch',
+        'faVideo',
+        'faVideoSlash',
+        'faMicrophoneAlt',
+        'faMicrophoneAltSlash',
+      ],
+      regular: [
+      ],
+      brands: [],
+    },
+    component: 'Fa',
+    suffix: true,
   },
 
   server: {

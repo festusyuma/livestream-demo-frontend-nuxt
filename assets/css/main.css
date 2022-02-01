@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-input {
-  @apply px-3 py-2 border-0
+.input-group {
+  @apply px-3 py-2 border-0 border-b-2 border-[#482863] bg-transparent px-3 py-2 mt-5 mb-7 min-w-[20rem]
+}
+
+.input-group input {
+  @apply bg-transparent border-0 outline-0 focus:border-0 outline-0 }
+
+button {
+  @apply bg-[#d1193e] text-white px-5 py-2 rounded-md flex items-center hover:drop-shadow-xl ease-in-out duration-200 }
+
+.icon {
+  @apply text-white pl-2
+}
+
+button.icon {
+  @apply w-10 h-10 justify-center rounded-[50%] p-0 }
+
+.spin {
+  animation-name: spin;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+  }
 }

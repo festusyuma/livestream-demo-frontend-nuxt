@@ -1,10 +1,10 @@
 <template>
-  <div class="start-stream-page px-2">
+  <div class="start-stream-page">
     <div class="grid grid-cols-10">
-      <div class="col-span-7 py-3 px-1">
+      <div class="col-span-7">
         <StreamViewer :admin="true" :publisher="publisher" />
       </div>
-      <div class="col-span-3 py-3 px-1">
+      <div class="col-span-3">
         <ChatBox :session="session" />
       </div>
     </div>
