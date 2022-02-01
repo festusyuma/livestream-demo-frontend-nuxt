@@ -57,6 +57,7 @@ export default {
             width: '100%',
             height: '100%',
             showControls: false,
+            subscribeToAudio: true
           }, this.handleError);
         });
 
