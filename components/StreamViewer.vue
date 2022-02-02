@@ -1,7 +1,9 @@
 <template>
   <div class="stream-viewer relative flex flex-col bg-black md:h-screen md: p-0">
     <div class="publisher-cover my-auto">
-      <div id="publisher" class="w-full aspect-video md:rounded-md md:overflow-hidden">
+      <div class="w-full relative pt-[60%]">
+        <div id="publisher" class="absolute top-0 left-0 bottom-0 right-0 w-full md:rounded-md md:overflow-hidden">
+        </div>
       </div>
       <div class="text-center flex z-50 py-3 px-1 absolute bottom-0 right-0">
         <template v-if="admin">

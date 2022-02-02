@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh
+}
+
 .input-group {
   @apply px-3 py-2 border-0 border-b-2 border-[#482863] bg-transparent px-3 py-2 mt-5 mb-7 min-w-[20rem]
 }
