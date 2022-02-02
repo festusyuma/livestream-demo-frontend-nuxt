@@ -2,8 +2,13 @@
   <div class="chat-box bg-[#f8f8f8] rounded-md flex flex-col p-3.5 min-h-full max-h-full">
     <Messages class="flex-grow overflow-y-auto" :session="session" />
     <div class="new-message mt-auto flex-shrink-0">
-      <form class="w-full" @submit="sendMessage">
-        <input v-model="message" type="text" class="w-full px-3 py-2" placeholder="Send message" />
+      <form ref="sendMessageForm" class="w-full" @submit="sendMessage">
+        <div class="input-group min-w-auto search">
+          <input v-model="message" type="text" placeholder="Send message" />
+          <div class="icon" @click="sendMessage">
+            <fa-icon :icon="['far', 'paper-plane']"></fa-icon>
+          </div>
+        </div>
       </form>
     </div>
   </div>
@@ -51,4 +56,11 @@ export default {
 </script>
 
 <style scoped>
+.chat-box .input-group {
+  @apply mb-0
+}
+
+.input-group .icon {
+  @apply text-[#d1193e] hover:cursor-pointer
+}
 </style>

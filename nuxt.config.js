@@ -84,6 +84,7 @@ export default {
         'faVolumeMute',
       ],
       regular: [
+        'faPaperPlane'
       ],
       brands: [],
     },

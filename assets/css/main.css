@@ -9,11 +9,10 @@ body {
 }
 
 .input-group {
-  @apply px-3 py-2 border-0 border-b-2 border-[#482863] bg-transparent px-3 py-2 mt-5 mb-7 min-w-[20rem]
-}
+  @apply px-3 py-2 border-0 border-b-2 border-[#482863] bg-transparent px-3 py-2 mt-5 mb-7 min-w-[20rem] flex }
 
 .input-group input {
-  @apply bg-transparent border-0 outline-0 focus:border-0 outline-0 }
+  @apply bg-transparent border-0 outline-0 focus:border-0 outline-0 flex-grow }
 
 button {
   @apply bg-[#d1193e] text-white px-5 py-2 rounded-md flex items-center hover:drop-shadow-xl ease-in-out duration-200 }
