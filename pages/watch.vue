@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col h-screen md:grid md:grid-cols-10 md:flex-none md:h-auto">
-    <div v-if="!registered" class="detail-form-cover flex flex-col justify-center h-screen">
+  <div class="watch-stream-page">
+    <div v-if="!registered" class="detail-form-cover flex flex-col justify-center h-screen w-full">
       <div class="details-form mx-auto bg-gray-100 rounded-md py-20 px-10">
         <h4 class="text-center text-xl font-medium mb-10">Enter Details</h4>
         <form @submit="watchStream">
@@ -21,11 +21,11 @@
         </form>
       </div>
     </div>
-    <div v-else class="grid grid-cols-10">
-      <div class="col-span-7">
+    <div v-else class="flex flex-col h-screen md:grid md:grid-cols-10 md:flex-none md:h-auto">
+      <div class="md:col-span-7">
         <StreamViewer :publisher="publisher" />
       </div>
-      <div class="col-span-3">
+      <div class="flex-grow md:col-span-3">
         <ChatBox :session="session" />
       </div>
     </div>
