@@ -92,7 +92,7 @@ export default {
             height: '100%',
             showControls: false,
             subscribeToAudio: true
-          }, this.handleError)
+          }, (e) => window.console.error(e))
         });
 
         // Connect to the session

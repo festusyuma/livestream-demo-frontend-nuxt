@@ -52,7 +52,7 @@ export default {
           width: '100%',
           height: '100%',
           showControls: false
-        }, this.handleError);
+        }, (e) => window.console.log(e));
         this.publisher = publisher
 
         // Connect to the session
