@@ -1,9 +1,9 @@
 <template>
-  <div class="stream-viewer relative h-screen flex flex-col bg-black">
+  <div class="stream-viewer relative flex flex-col bg-black py-10 md:h-screen md: p-0">
     <div class="publisher-cover my-auto">
-      <div id="publisher" class="w-full aspect-video rounded-md overflow-hidden">
+      <div id="publisher" class="w-full aspect-video md:rounded-md md:overflow-hidden">
       </div>
-      <div class="absolute bottom-5 right-3 text-center flex z-50">
+      <div class="absolute bottom-1.5 right-1.5 text-center flex z-50 md:bottom-5 md:right-3">
         <template v-if="admin">
           <button class="control icon" @click="controls.video = !controls.video">
             <fa-icon v-if="controls.video" :icon="['fas', 'video']"></fa-icon>
@@ -78,6 +78,6 @@ export default {
 
 <style scoped>
 .control {
-  margin: 0 0.5rem;
+  @apply mx-1 md:mx-2;
 }
 </style>

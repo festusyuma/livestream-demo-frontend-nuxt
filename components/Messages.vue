@@ -3,7 +3,7 @@
     <div
       v-for="(message, id) in messages"
       :key="`message-${id}`"
-      class="message w-80"
+      class="message w-[80%]"
       :class="[message.mine ? 'mine' : '']"
     >
       <small
