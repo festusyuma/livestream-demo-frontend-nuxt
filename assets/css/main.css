@@ -17,7 +17,7 @@ button {
 }
 
 button.icon {
-  @apply w-6 h-6 text-[0.7rem] justify-center rounded-[50%] p-0 md:w-10 md:h-10 md:text-[1rem] }
+  @apply w-8 h-8 text-[0.85rem] justify-center rounded-[50%] p-0 md:w-10 md:h-10 md:text-[1rem] }
 
 .spin {
   animation-name: spin;

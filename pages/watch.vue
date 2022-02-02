@@ -1,5 +1,5 @@
 <template>
-  <div class="watch-stream h-screen">
+  <div class="flex flex-col h-screen md:grid md:grid-cols-10 md:flex-none md:h-auto">
     <div v-if="!registered" class="detail-form-cover flex flex-col justify-center h-screen">
       <div class="details-form mx-auto bg-gray-100 rounded-md py-20 px-10">
         <h4 class="text-center text-xl font-medium mb-10">Enter Details</h4>
