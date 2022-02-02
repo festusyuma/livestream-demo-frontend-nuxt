@@ -26,6 +26,12 @@ export default {
     }
   },
 
+  watch: {
+    session(val) {
+      window.console.log(val)
+    }
+  },
+
   methods: {
     sendMessage(e) {
       e.preventDefault()

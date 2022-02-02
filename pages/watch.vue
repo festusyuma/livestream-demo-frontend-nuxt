@@ -55,6 +55,13 @@ export default {
   async fetch() {
   },
 
+  watch: {
+    session(val) {
+      window.console.log(val)
+
+    }
+  },
+
   methods: {
     async watchStream(e) {
       e.preventDefault()
@@ -85,17 +92,14 @@ export default {
       try {
         const session = OT.initSession(apiKey, sessionId)
 
-        const subscriber = OT.Subscriber('publisher', {
-          insertMode: 'append',
-          width: '100%',
-          height: '100%',
-          showControls: false,
-          subscribeToAudio: true
-        })
-
-
         session.on('streamCreated', function(event) {
-          session.subscribe(event.stream, subscriber, this.handleError);
+          this.publisher = session.subscribe(event.stream, 'publisher', {
+            insertMode: 'append',
+            width: '100%',
+            height: '100%',
+            showControls: false,
+            subscribeToAudio: true
+          }, this.handleError)
         });
 
         // Connect to the session
