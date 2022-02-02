@@ -34,16 +34,33 @@ export default {
     }
   },
 
+  watch: {
+    session() {
+      this.addSessionListener()
+    }
+  },
+
   mounted() {
-    this.session.on('signal:msg', (e) => {
+    this.addSessionListener()
+  },
+
+  methods: {
+    addSessionListener() {
+      if (!this.session) return
+
+      this.session.off('signal:msg', this.sessionListener)
+      this.session.on('signal:msg', this.sessionListener)
+    },
+
+    sessionListener(e) {
       const senderData = JSON.parse(e.from.data)
       const message = JSON.parse(e.data)
       window.console.log(senderData, message)
       message.mine = e.from.connectionId === this.session.connection.id
       message.from = senderData.name
       this.messages.push(message)
-    })
-  },
+    }
+  }
 }
 </script>
 

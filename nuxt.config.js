@@ -79,6 +79,9 @@ export default {
         'faVideoSlash',
         'faMicrophoneAlt',
         'faMicrophoneAltSlash',
+        'faPhoneSlash',
+        'faVolumeUp',
+        'faVolumeMute',
       ],
       regular: [
       ],
