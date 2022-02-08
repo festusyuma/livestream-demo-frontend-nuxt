@@ -60,6 +60,9 @@ export default {
           if (error) this.handleError(error);
           else session.publish(publisher, (e) => {
             if (e) this.$toast.error(e.message)
+            else {
+              this.$axios.$put('/opentok/publish').then((e) => window.console.log(e))
+            }
           })
         });
 
