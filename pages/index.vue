@@ -56,14 +56,14 @@ export default {
         this.publisher = publisher
 
         // Connect to the session
-        session.connect(token, function(error) {
+        session.connect(token, (error) => {
           if (error) this.handleError(error);
           else session.publish(publisher, (e) => {
             window.console.log('entered')
             window.console.log(e)
             if (e) this.$toast.error(e.message)
             else {
-              this.$axios.$put('/opentok/publish').then((e) => window.console.log(e))
+              this.$axios.$put('/opentok/publish').then((res) => window.console.log(res))
             }
           })
         });
