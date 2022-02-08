@@ -59,6 +59,8 @@ export default {
         session.connect(token, function(error) {
           if (error) this.handleError(error);
           else session.publish(publisher, (e) => {
+            window.console.log('entered')
+            window.console.log(e)
             if (e) this.$toast.error(e.message)
             else {
               this.$axios.$put('/opentok/publish').then((e) => window.console.log(e))
