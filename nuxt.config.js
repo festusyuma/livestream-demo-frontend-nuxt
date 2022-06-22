@@ -77,6 +77,7 @@ export default {
         'faCircleNotch',
         'faVideo',
         'faVideoSlash',
+        'faMicrophone',
         'faMicrophoneAlt',
         'faMicrophoneAltSlash',
         'faPhoneSlash',
@@ -98,6 +99,7 @@ export default {
   },
 
   env: {
-    BASE_URL: process.env.BASE_URL || 'https://api.livestream.festusyuma.com',
+    BASE_URL: process.env.BASE_URL,
+    OPENTOK_API_KEY: process.env.OPENTOK_API_KEY,
   }
 }

@@ -15,6 +15,10 @@
             <fa-icon v-if="controls.mic" :icon="['fas', 'microphone-alt']"></fa-icon>
             <fa-icon v-else :icon="['fas', 'microphone-alt-slash']"></fa-icon>
           </button>
+          <button class="control icon" @click="controls.mic = !controls.mic">
+            <fa-icon v-if="controls.mic" :icon="['fas', 'microphone']"></fa-icon>
+            <fa-icon v-else :icon="['fas', 'microphone-alt-slash']"></fa-icon>
+          </button>
         </template>
         <template v-else>
           <button class="control icon" @click="controls.audio = !controls.audio">

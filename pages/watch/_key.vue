@@ -48,6 +48,9 @@ export default {
       user: {
         fullName: '',
         phoneNumber: ''
+      },
+      connectionData: {
+
       }
     }
   },
@@ -86,13 +89,7 @@ export default {
         const session = OT.initSession(apiKey, sessionId)
 
         session.on('streamCreated', (event) => {
-          this.publisher = session.subscribe(event.stream, 'publisher', {
-            insertMode: 'append',
-            width: '100%',
-            height: '100%',
-            showControls: false,
-            subscribeToAudio: true
-          }, (e) => window.console.error(e))
+          session.subscribe(event.stream)
         });
 
         // Connect to the session
