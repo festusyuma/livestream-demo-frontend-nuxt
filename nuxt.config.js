@@ -99,7 +99,7 @@ export default {
   },
 
   env: {
-    BASE_URL: process.env.BASE_URL,
+    BASE_URL: process.env.BASE_URL || 'https://api.livestream.festusyuma.com',
     OPENTOK_API_KEY: process.env.OPENTOK_API_KEY,
   }
 }
