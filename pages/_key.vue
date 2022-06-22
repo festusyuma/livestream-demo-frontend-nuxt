@@ -72,8 +72,8 @@ export default {
 
         const { data: tokenData } = await this.$axios.$post('token', {
           key,
-          username: 'admin@skillpaddy.com',
-          data: {fullName: 'Admin User'},
+          username: 'user@skillpaddy.com',
+          data: {name: 'Admin User'},
           mode: 'PRESENTER'
         })
 
