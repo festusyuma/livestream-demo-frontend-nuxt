@@ -2,7 +2,7 @@
   <div class="start-stream-page">
     <div class="flex flex-col h-screen md:grid md:grid-cols-10 md:flex-none md:h-auto">
       <div class="md:col-span-7">
-        <StreamViewer :admin="true" :publisher="publisher" />
+        <StreamViewer :admin="true" :publisher="publisher" @disconnect="stopBroadcast" />
       </div>
       <div class="flex-grow md:col-span-3">
         <ChatBox :session="audioSession" />
@@ -122,7 +122,7 @@ export default {
         audioSession.connect(audioToken, (e) => {
           if (e) return window.console.log('audio connection error', e)
           audioSession.on('streamCreated', (event) => {
-            audioSession.subscribe(event.stream)
+            audioSession.subscribe(event.stream, 'streams')
           })
 
           this.audioSession = audioSession
@@ -143,8 +143,15 @@ export default {
     async stopBroadcast() {
       try {
         await this.$axios.$delete(`/stream/${this.streamKey}/broadcast`)
+        if (this.publisher) {
+          this.publisher.publishVideo(false)
+          this.publisher.publishAudio(false)
+          this.publisher.disconnect()
+        }
         if (this.videoSession) this.videoSession.disconnect()
         if (this.audioSession) this.audioSession.disconnect()
+
+        this.$toast.success('Broadcast ended. Thank you for joining')
       } catch (e) {
         window.console.error('Stop broadcast error', e.message)
       }

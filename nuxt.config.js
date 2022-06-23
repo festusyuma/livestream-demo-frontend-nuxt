@@ -1,3 +1,5 @@
+import CopyPlugin from "copy-webpack-plugin";
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -64,6 +66,17 @@ export default {
         autoprefixer: {},
       },
     },
+
+    plugins: [
+      new CopyPlugin({
+        patterns: [
+          {
+            from: 'node_modules/amazon-ivs-player/dist/assets/amazon-ivs-wasmworker.min.*',
+            to: '[name].[ext]'
+          }
+        ]
+      })
+    ]
   },
 
   toast: {

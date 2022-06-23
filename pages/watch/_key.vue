@@ -5,6 +5,9 @@
         <h4 class="text-center text-xl font-medium mb-10">Enter Details</h4>
         <form @submit="watchStream">
           <div class="input-group">
+            <input v-model="user.email" type="email" placeholder="Email" title="email" />
+          </div>
+          <div class="input-group">
             <input v-model="user.phoneNumber" type="tel" placeholder="Phone Number" title="phone number" />
           </div>
           <div class="input-group">
@@ -23,10 +26,10 @@
     </div>
     <div v-else class="flex flex-col h-screen md:grid md:grid-cols-10 md:flex-none md:h-auto">
       <div class="md:col-span-7">
-        <StreamViewer :publisher="publisher" />
+        <StreamViewer :broadcaster="broadcaster" />
       </div>
       <div class="flex-grow md:col-span-3">
-        <ChatBox :session="session" />
+        <ChatBox :session="audioSession" />
       </div>
     </div>
   </div>
@@ -41,71 +44,112 @@ export default {
   data() {
     return {
       registered: false,
-      token: null,
-      session: null,
-      publisher: null,
       loading: false,
+      audioSession: null,
+      publisher: null,
+      connectionData: {
+        audioChannel: null,
+        audioToken: null,
+      },
+      broadcaster: null,
       user: {
+        email: '',
         fullName: '',
         phoneNumber: ''
       },
-      connectionData: {
-
-      }
     }
   },
 
-  async fetch() {
+  computed: {
+    streamKey() {
+      return this.$route.params.key
+    },
+    apiKey() {
+      return process.env.OPENTOK_API_KEY
+    }
+  },
+
+  mounted() {
+    const userData = window.localStorage.getItem('userData')
+    if (userData) this.user = JSON.parse(userData)
   },
 
   methods: {
     async watchStream(e) {
       e.preventDefault()
-      const { fullName, phoneNumber } = this.user
+
+      if (this.loading) return
       this.loading = true
 
+      window.localStorage.setItem('userData', JSON.stringify(this.user))
+      const { fullName, phoneNumber, email } = this.user
+
       try {
-        const res = await this.$axios.$post('/opentok/join', {
-          fullName,
-          phoneNumber
+        const {data: tokenData} = await this.$axios.$post('/token', {
+          key: this.streamKey,
+          username: email,
+          data: {name: fullName, phoneNumber, email},
+          mode: 'VIEWER'
         })
 
-        if (res.success) {
-          const { apiKey, sessionId, token } = res.data
-          this.token = token
-          this.registered = true
-          this.initStream(apiKey, sessionId, token)
-          this.$toast.success('Steam connected, please be respectful in the comment section')
-        }
+        if (!tokenData) return
+        const {
+          audioToken, videoToken,
+          session: {audioChannel, broadcast: {broadcastUrl}}
+        } = tokenData
+
+        this.registered = true
+        this.connectionData = {audioChannel, audioToken}
+        this.broadcaster = {videoToken, broadcastUrl}
+        this.$toast.success('Steam connected, please be respectful in the comment section')
+        this.initStream()
       } catch (e) {
         window.console.error(e)
+      } finally {
+        this.loading = false
       }
-
-      this.loading = false
     },
 
-    initStream(apiKey, sessionId, token) {
+    initStream() {
       try {
-        const session = OT.initSession(apiKey, sessionId)
-
-        session.on('streamCreated', (event) => {
-          session.subscribe(event.stream)
-        });
+        const {audioChannel, audioToken} = this.connectionData
+        const audioSession = OT.initSession(this.apiKey, audioChannel)
 
         // Connect to the session
-        session.connect(token, function(error) {
-          if (error) this.handleError(error);
-        });
+        audioSession.connect(audioToken, (e) => {
+          if (e) window.console.error(e);
 
-        this.session = session
+          const publisher = OT.initPublisher(
+            'audio-publisher',
+            {
+              publishAudio: true,
+              publishVideo: false,
+              showControls: false
+            },
+            (e) => {
+              if (e) window.console.error(e)
+            }
+          )
+
+          audioSession.on('streamCreated', (event) => {
+            audioSession.subscribe(event.stream, 'streams')
+          })
+
+          audioSession.publish(publisher, (e) => {
+            if (e) return window.console.log('audio connection error', e)
+            this.publisher = publisher
+          })
+
+          this.audioSession = audioSession
+        });
       } catch (e) {
         window.console.log(e)
       }
     },
 
-    handleError(e) {
-      if (e) {
-        window.console.log(e)
+    disconnect() {
+      if (this.audioSession) {
+        // this.audioSession.disconnect()
       }
     }
   }
