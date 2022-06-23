@@ -155,7 +155,7 @@ export default {
   }
 
   #audio-publisher {
-    @apply absolute bottom-0 right-0 w-[5rem] h-[5rem] rounded-md bg-amber-700;
+    @apply hidden;
   }
 }
 
