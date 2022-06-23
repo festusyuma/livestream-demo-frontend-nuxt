@@ -149,7 +149,7 @@ export default {
 
     disconnect() {
       if (this.audioSession) {
-        // this.audioSession.disconnect()
+        this.audioSession.disconnect()
       }
     }
   }
