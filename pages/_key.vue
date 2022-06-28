@@ -161,7 +161,5 @@ export default {
 </script>
 
 <style>
-.start-stream-page {
-
-}
+.start-stream-page {}
 </style>
