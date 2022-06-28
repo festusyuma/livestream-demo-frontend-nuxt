@@ -63,6 +63,7 @@ export default {
   methods: {
     async initStream() {
       try {
+        console.log(this.apiKey)
         if (!this.streamKey) return
         const key = this.streamKey
         const { data: session } = await this.$axios.$post(`stream/${key}`)
